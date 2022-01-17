@@ -59,6 +59,7 @@ marketplace.forEach(obj => brandNames.push(obj.brand))
 marketplace.forEach(function(entry){
     brandNames.push(entry.brand)
 })
+//
 // 2. Log the variable
 console.log(brandNames)
 // 3. Log how many brands we have

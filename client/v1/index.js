@@ -55,10 +55,15 @@ console.log(numberOfProducts)
 // 1. Create a variable and assign it the list of brands name only
 var brandNames = []
 marketplace.forEach(obj => brandNames.push(obj.brand))
+
+marketplace.forEach(function(entry){
+    brandNames.push(entry.brand)
+})
 // 2. Log the variable
 console.log(brandNames)
 // 3. Log how many brands we have
-console.log(new Set(brandNames).size)
+const uniqueBrandNames = new Set(brandNames)
+console.log(uniqueBrandNames.size)
 
 // 🎯 TODO: Sort by price
 // 1. Create a function to sort the marketplace products by price
@@ -115,22 +120,33 @@ console.log(between50And100)
 //   'brand-name-n': [{...}, {...}, ..., {...}],
 // };
 //
+var brands = {}
+uniqueBrandNames.forEach(name => brands[name] = [])
+marketplace.forEach(entry => brands[entry.brand].push(entry))
 // 2. Log the variable
+console.log(brands)
 // 3. Log the number of products by brands
+uniqueBrandNames.forEach(name => {
+  console.log(brands[name].length)
+})
 
 
 // 🎯 TODO: Sort by price for each brand
 // 1. For each brand, sort the products by price, from highest to lowest
+uniqueBrandNames.forEach(name =>{
+  brands[name].sort(priceComparator)
+})
 // 2. Log the sort
+console.log(brands)
 
 
 // 🎯 TODO: Sort by date for each brand
 // 1. For each brand, sort the products by date, from old to recent
+uniqueBrandNames.forEach(name =>{
+  brands[name].sort(dateComparator)
+})
 // 2. Log the sort
-
-
-
-
+console.log(brands)
 
 /**
  * 💶
@@ -142,10 +158,8 @@ console.log(between50And100)
 // 🎯 TODO: Compute the p90 price value
 // 1. Compute the p90 price value of each brand
 // The p90 value (90th percentile) is the lower value expected to be exceeded in 90% of the products
-
-
-
-
+var p90 = rankedByPrice[parseInt(0.9 * rankedByPrice.length)].price
+console.log(p90)
 
 /**
  * 🧥

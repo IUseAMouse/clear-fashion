@@ -71,14 +71,21 @@ console.log(rankedByPrice)
 
 // 🎯 TODO: Sort by date
 // 1. Create a function to sort the marketplace objects by products date
+var dateComparator = (a,b) => {
+    return new Date(a.date).getTime() - new Date(b.date).getTime()
+}
 // 2. Create a variable and assign it the list of products by date from recent to old
+var rankedByDate = marketplace.sort(dateComparator)
 // 3. Log the variable
-
+console.log(rankedByDate)
 
 // 🎯 TODO: Filter a specific price range
 // 1. Filter the list of products between 50€ and 100€
+var between50And100 = marketplace.filter(function(elem){
+    return elem.price > 50 && elem.price < 100
+})
 // 2. Log the list
-
+console.log(between50And100)
 
 // 🎯 TODO: Average Basket
 // 1. Determine the average basket of the marketplace

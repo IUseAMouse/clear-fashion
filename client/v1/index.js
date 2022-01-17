@@ -31,8 +31,8 @@ console.log(MY_FAVORITE_BRANDS[0]);
 // 1. Create a new variable and assign it the link of the cheapest t-shirt
 // I can find on these e-shops
 // 2. Log the variable
-
-
+const cheapest = 'https://adresse.paris/t-shirts-et-polos/4238-t-shirt-ranelagh-1300000262026.html'
+console.log(cheapest)
 
 
 
@@ -47,19 +47,26 @@ console.log(MY_FAVORITE_BRANDS[0]);
 
 // 🎯 TODO: Number of products
 // 1. Create a variable and assign it the number of products
+var numberOfProducts = marketplace.length
 // 2. Log the variable
-
+console.log(numberOfProducts)
 
 // 🎯 TODO: Brands name
 // 1. Create a variable and assign it the list of brands name only
+var brandNames = []
+marketplace.forEach(obj => brandNames.push(obj.brand))
 // 2. Log the variable
+console.log(brandNames)
 // 3. Log how many brands we have
-
+console.log(new Set(brandNames).size)
 
 // 🎯 TODO: Sort by price
 // 1. Create a function to sort the marketplace products by price
+var priceComparator = (a,b) => {return parseInt(a.price) - parseInt(b.price)}
 // 2. Create a variable and assign it the list of products by price from lowest to highest
+var rankedByPrice = marketplace.sort(priceComparator);
 // 3. Log the variable
+console.log(rankedByPrice)
 
 
 // 🎯 TODO: Sort by date

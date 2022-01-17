@@ -100,6 +100,14 @@ console.log(between50And100)
 // 1. Determine the average basket of the marketplace
 // 2. Log the average
 
+var averagePrice = 0
+marketplace.forEach(entry => {
+  averagePrice += entry.price
+})
+
+averagePrice = averagePrice/marketplace.length
+console.log('Average price : ', averagePrice)
+
 
 /**
  * 🏎
@@ -297,8 +305,9 @@ let jacket = blueJacket;
 jacket.favorite = true;
 
 // 1. Log `blueJacket` and `jacket` variables
+console.log(blueJacket, jacket)
 // 2. What do you notice?
-
+console.log("Changing jacket properties also affected blueJacket")
 blueJacket = {
   'link': 'https://coteleparis.com/collections/tous-les-produits-cotele/products/la-veste-bleu-roi',
   'price': 110,
@@ -306,10 +315,8 @@ blueJacket = {
 };
 
 // 3. Update `jacket` property with `favorite` to true WITHOUT changing blueJacket properties
-
-
-
-
+jacket['favorite'] = false;
+console.log(blueJacket, jacket)
 
 /**
  * 🎬

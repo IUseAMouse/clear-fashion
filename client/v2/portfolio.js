@@ -10,6 +10,7 @@ const selectShow = document.querySelector('#show-select');
 const selectPage = document.querySelector('#page-select');
 const sectionProducts = document.querySelector('#products');
 const spanNbProducts = document.querySelector('#nbProducts');
+const sortInfo = document.querySelector('#sort-select');
 
 /**
  * Set global value
@@ -17,7 +18,18 @@ const spanNbProducts = document.querySelector('#nbProducts');
  * @param {Object} meta - pagination meta info
  */
 const setCurrentProducts = ({result, meta}) => {
-  currentProducts = result;
+
+  const sortTranslator = {
+    'price-asc' : (a,b) => {return parseInt(a.price) - parseInt(b.price)},
+    'price-desc' : (a,b) => {return parseInt(b.price) - parseInt(a.price)},
+    'date-desc' : (a,b) => {return new Date(a.date).getTime() - new Date(b.date).getTime()},
+    'date-asc' : (a,b) => {return new Date(b.date).getTime() - new Date(a.date).getTime()},
+    'none' : (a,b) => {return true}
+  };
+
+  console.log(sortInfo.value)
+
+  currentProducts = result.sort(sortTranslator[sortInfo.value]);
   currentPagination = meta;
 };
 
@@ -40,6 +52,7 @@ const fetchProducts = async (page = 1, size = 12) => {
     }
 
     return body.data;
+
   } catch (error) {
     console.error(error);
     return {currentProducts, currentPagination};
@@ -116,10 +129,16 @@ selectShow.addEventListener('change', event => {
     .then(() => render(currentProducts, currentPagination));
 });
 
-selectPage.addEventListener('change', event =>{
+selectPage.addEventListener('change', event => {
   fetchProducts(parseInt(event.target.value), currentPagination.pageCount)
     .then(setCurrentProducts)
     .then(() => render(currentProducts, currentPagination));
+})
+
+sortInfo.addEventListener('change', event => {
+  fetchProducts(currentPagination.currentPage, currentPagination.pageCount)
+  .then(setCurrentProducts)
+  .then(() => render(currentProducts, currentPagination));
 })
 
 document.addEventListener('DOMContentLoaded', () =>

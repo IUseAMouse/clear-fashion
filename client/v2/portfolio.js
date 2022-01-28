@@ -22,8 +22,8 @@ const setCurrentProducts = ({result, meta}) => {
   const sortTranslator = {
     'price-asc' : (a,b) => {return parseInt(a.price) - parseInt(b.price)},
     'price-desc' : (a,b) => {return parseInt(b.price) - parseInt(a.price)},
-    'date-desc' : (a,b) => {return new Date(a.date).getTime() - new Date(b.date).getTime()},
-    'date-asc' : (a,b) => {return new Date(b.date).getTime() - new Date(a.date).getTime()},
+    'date-desc' : (a,b) => {return new Date(a.released).getTime() - new Date(b.released).getTime()},
+    'date-asc' : (a,b) => {return new Date(b.released).getTime() - new Date(a.released).getTime()},
     'none' : (a,b) => {return true}
   };
 

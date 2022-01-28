@@ -11,6 +11,7 @@ const selectPage = document.querySelector('#page-select');
 const sectionProducts = document.querySelector('#products');
 const spanNbProducts = document.querySelector('#nbProducts');
 const sortInfo = document.querySelector('#sort-select');
+const brandNames = document.querySelector('#brand-select')
 
 /**
  * Set global value
@@ -26,10 +27,14 @@ const setCurrentProducts = ({result, meta}) => {
     'date-asc' : (a,b) => {return new Date(b.released).getTime() - new Date(a.released).getTime()},
     'none' : (a,b) => {return true}
   };
+  
+  const filterTranslator = {
+  
+  };
 
-  console.log(sortInfo.value)
+  result = result.sort(sortTranslator[sortInfo.value]);
 
-  currentProducts = result.sort(sortTranslator[sortInfo.value]);
+  currentProducts = result
   currentPagination = meta;
 };
 
@@ -39,7 +44,7 @@ const setCurrentProducts = ({result, meta}) => {
  * @param  {Number}  [size=12] - size of the page
  * @return {Object}
  */
-const fetchProducts = async (page = 1, size = 12) => {
+const fetchProducts = async (page = 1, size = 12, sortMethod, filterMethos) => {
   try {
     const response = await fetch(
       `https://clear-fashion-api.vercel.app?page=${page}&size=${size}`
@@ -109,6 +114,12 @@ const renderIndicators = pagination => {
   spanNbProducts.innerHTML = count;
 };
 
+const getBrands = async () => {
+  const response = await fetch(
+    `https://clear-fashion-api.vercel.app`
+  );
+}
+
 const render = (products, pagination) => {
   renderProducts(products);
   renderPagination(pagination);
@@ -146,3 +157,4 @@ document.addEventListener('DOMContentLoaded', () =>
     .then(setCurrentProducts)
     .then(() => render(currentProducts, currentPagination))
 );
+

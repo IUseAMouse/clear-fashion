@@ -78,7 +78,7 @@ console.log(rankedByPrice)
 
 // 🎯 TODO: Sort by date
 // 1. Create a function to sort the marketplace objects by products date
-var dateComparator = (a,b) => {return new Date(a.released).getTime() - new Date(b.released).getTime()}
+var dateComparator = (a,b) => {return new Date(a.date).getTime() - new Date(b.date).getTime()}
 // 2. Create a variable and assign it the list of products by date from recent to old
 var rankedByDate = marketplace.sort(dateComparator)
 // 3. Log the variable

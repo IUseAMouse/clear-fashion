@@ -11,7 +11,9 @@ const selectPage = document.querySelector('#page-select');
 const sectionProducts = document.querySelector('#products');
 const spanNbProducts = document.querySelector('#nbProducts');
 const sortInfo = document.querySelector('#sort-select');
-const brandNames = document.querySelector('#brand-select')
+const brandNames = document.querySelector('#brand-select');
+const recentProducts = document.querySelector('#recent-products');
+const reasonablePrice = document.querySelector('#reasonable-price')
 
 /**
  * Set global value
@@ -20,6 +22,9 @@ const brandNames = document.querySelector('#brand-select')
  */
 const setCurrentProducts = ({result, meta}) => {
 
+  /* Defined here because of scope purposes */
+  const brandEqualizer = (object, brandName) => {return object.brand == brandName};
+
   const sortTranslator = {
     'price-asc' : (a,b) => {return parseInt(a.price) - parseInt(b.price)},
     'price-desc' : (a,b) => {return parseInt(b.price) - parseInt(a.price)},
@@ -27,12 +32,24 @@ const setCurrentProducts = ({result, meta}) => {
     'date-asc' : (a,b) => {return new Date(b.released).getTime() - new Date(a.released).getTime()},
     'none' : (a,b) => {return true}
   };
-  
-  const filterTranslator = {
-  
-  };
 
-  result = result.sort(sortTranslator[sortInfo.value]);
+  const filterTranslator = {
+    'loom' : (a) => brandEqualizer(a,'loom'),
+    'coteleparis' : (a) => brandEqualizer(a,'coteleparis'),
+    '1083' : (a) => brandEqualizer(a,'1083'),
+    'dedicated' : (a) => brandEqualizer(a,'dedicated'),
+    'adresse' : (a) => brandEqualizer(a,'adresse'),
+    'yes-reasonable' : (a) => {return a.price < 100},
+    'yes-recent' : (a) => {return new Date().getTime() - a.released < 1210000000},
+    'none' : (a) => {return true}
+  }
+
+  
+
+  result = result.sort(sortTranslator[sortInfo.value])
+  .filter(filterTranslator[brandNames.value])
+  .filter(filterTranslator[recentProducts.value])
+  .filter(filterTranslator[reasonablePrice.value]);
 
   currentProducts = result
   currentPagination = meta;
@@ -147,6 +164,24 @@ selectPage.addEventListener('change', event => {
 })
 
 sortInfo.addEventListener('change', event => {
+  fetchProducts(currentPagination.currentPage, currentPagination.pageCount)
+  .then(setCurrentProducts)
+  .then(() => render(currentProducts, currentPagination));
+})
+
+brandNames.addEventListener('change', event => {
+  fetchProducts(currentPagination.currentPage, currentPagination.pageCount)
+  .then(setCurrentProducts)
+  .then(() => render(currentProducts, currentPagination));
+})
+
+recentProducts.addEventListener('change', event => {
+  fetchProducts(currentPagination.currentPage, currentPagination.pageCount)
+  .then(setCurrentProducts)
+  .then(() => render(currentProducts, currentPagination));
+})
+
+reasonablePrice.addEventListener('change', event => {
   fetchProducts(currentPagination.currentPage, currentPagination.pageCount)
   .then(setCurrentProducts)
   .then(() => render(currentProducts, currentPagination));

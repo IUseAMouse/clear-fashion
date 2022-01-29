@@ -22,11 +22,20 @@
         <select name="page" id="page-select"> </select>
       </div>
       <div id="filters">
-        <span>By reasonable price</span>
-        <span>By recently released</span>
+        <label for="reasonable-price">By Reasonable Price:</label>
+        <select name="price" id="reasonable-price">
+          <option value="none">No</option> 
+          <option value="yes-reasonable">Yes</option>    
+        </select>
+        <label for="recent-products">By Recently Released:</label>
+        <select name="price" id="recent-products"> 
+          <option value="none">No</option>
+          <option value="yes-recent">Yes</option>
+        </select>
         <div id="brand">
           <label for="brand-select">By brands:</label>
           <select name="brand" id="brand-select"> 
+            <option value="none">No</option>
             <option value="loom">Loom</option>
             <option value="coteleparis">Cotele Paris</option>
             <option value="1083">1083</option>

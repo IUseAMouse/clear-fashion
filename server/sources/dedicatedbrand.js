@@ -1,5 +1,6 @@
 const fetch = require('node-fetch');
 const cheerio = require('cheerio');
+var fs = require('fs');
 
 /**
  * Parse webpage e-shop
@@ -9,16 +10,16 @@ const cheerio = require('cheerio');
 const parse = data => {
   const $ = cheerio.load(data);
 
-  return $('.productList-container .productList')
+  return $('.product-info')
     .map((i, element) => {
       const name = $(element)
-        .find('.productList-title')
+        .find('.product-name')
         .text()
         .trim()
         .replace(/\s/g, ' ');
       const price = parseInt(
         $(element)
-          .find('.productList-price')
+          .find('.price')
           .text()
       );
 
@@ -38,8 +39,16 @@ module.exports.scrape = async url => {
 
     if (response.ok) {
       const body = await response.text();
+      // try{
+      //   fs.writeFileSync('products.json', body);
+      //   return JSON.parse(body);
+      // }
+      // catch (error){
+      //   console.log(error);
+      // }
 
       return parse(body);
+      
     }
 
     console.error(response);

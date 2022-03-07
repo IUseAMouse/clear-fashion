@@ -19,14 +19,36 @@ app.get('/', (request, response) => {
 });
 
 app.get('/products/:id', async (request, response) => {
-  params = await request.params;
-  console.log(params)
-  response.send({'ack': true, 'params' : params});
+  specs = await request.params.id.split('&');
+  data = {}
+
+  specs.forEach(element => {
+    key_val = element.split('=');
+    data[key_val[0]] = key_val[1];
+  });
+  try{
+
+  }
+  catch(e){
+
+  }
+  response.send({'ack': true, 'params' : data});
 });
 
 app.get('/products/search', async (request, response) => {
-  params = await request.params;
-  console.log(params)
+  specs = await request.params.id.split('&');
+  data = {}
+
+  specs.forEach(element => {
+    key_val = element.split('=');
+    data[key_val[0]] = key_val[1];
+  });
+  try{
+
+  }
+  catch(e){
+    
+  }
   response.send({'ack': true, 'params' : params});
 });
 

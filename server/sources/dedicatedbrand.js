@@ -39,13 +39,13 @@ module.exports.scrape = async url => {
 
     if (response.ok) {
       const body = await response.text();
-      // try{
-      //   fs.writeFileSync('products.json', body);
-      //   return JSON.parse(body);
-      // }
-      // catch (error){
-      //   console.log(error);
-      // }
+      try{
+        fs.writeFileSync('products.json', body);
+        return JSON.parse(body);
+      }
+      catch (error){
+        console.log(error);
+      }
 
       return parse(body);
       

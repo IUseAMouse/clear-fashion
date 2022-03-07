@@ -2,6 +2,7 @@
 const dedicatedbrand = require('./sites/dedicatedbrand');
 const loom = require('./sites/loom');
 const db = require('./db');
+var MongoClient = require('mongodb').MongoClient;
 
 async function sandbox () {
   try {
@@ -51,20 +52,27 @@ async function sandbox () {
 
     console.log('\n');
 
-    const result = await db.insert(products);
+    MongoClient.connect(process.env.MONGODB_URI, async function(err, db) {
+      if (err) {
+        throw err;
+      }
 
-    console.log(`💽  ${result.insertedCount} inserted products`);
+      const result = await db.insert(products);
 
-    console.log('\n');
+      console.log(`💽  ${result.insertedCount} inserted products`);
 
-    console.log('💽  Find Loom products only');
+      console.log('\n');
 
-    const loomOnly = await db.find({'brand': 'loom'});
+      console.log('💽  Find Loom products only');
 
-    console.log(`👕 ${loomOnly.length} total of products found for Loom`);
-    console.log(loomOnly);
+      const loomOnly = await db.find({'brand': 'loom'});
 
-    db.close();
+      console.log(`👕 ${loomOnly.length} total of products found for Loom`);
+      console.log(loomOnly);
+
+      db.close();
+      
+    });
     
   } catch (e) {
     console.error(e);

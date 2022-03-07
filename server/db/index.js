@@ -1,10 +1,13 @@
 require('dotenv').config();
 const {MongoClient} = require('mongodb');
 const fs = require('fs');
+require('loadenv')();
 
 const MONGODB_DB_NAME = 'clearfashion';
 const MONGODB_COLLECTION = 'products';
 const MONGODB_URI = process.env.MONGODB_URI;
+
+console.log(process.env.MONGODB_URI);
 
 let client = null;
 let database = null;

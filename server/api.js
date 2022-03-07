@@ -18,6 +18,12 @@ app.get('/', (request, response) => {
   response.send({'ack': true});
 });
 
+app.get('/products(.\w+)(.\w+)(.\w+)(.\w+)(.\w+)(.\w+)(.\w+)(.\w+)', async (request, response) => {
+  params = await request.params;
+  console.log(params)
+  response.send({'ack': true, 'params' : params});
+});
+
 app.listen(PORT);
 
 console.log(`📡 Running on port ${PORT}`);

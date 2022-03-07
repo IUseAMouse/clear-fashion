@@ -11,6 +11,7 @@
     "express": "^4.17.2",
     "fs": "^0.0.1-security",
     "helmet": "^5.0.1",
+    "loadenv": "^2.2.0",
     "mongodb": "^4.3.0",
     "node-fetch": "^2.6.7",
     "parse-domain": "^4.1.0",

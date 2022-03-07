@@ -18,7 +18,13 @@ app.get('/', (request, response) => {
   response.send({'ack': true});
 });
 
-app.get('/products(.\w+)(.\w+)(.\w+)(.\w+)(.\w+)(.\w+)(.\w+)(.\w+)', async (request, response) => {
+app.get('/products/:id', async (request, response) => {
+  params = await request.params;
+  console.log(params)
+  response.send({'ack': true, 'params' : params});
+});
+
+app.get('/products/search', async (request, response) => {
   params = await request.params;
   console.log(params)
   response.send({'ack': true, 'params' : params});

@@ -1,8 +1,6 @@
 const cors = require('cors');
-const { query } = require('express');
 const express = require('express');
 const helmet = require('helmet');
-const { ObjectId } = require('mongodb');
 const db = require('./db');
 
 const PORT = 8092;
@@ -26,16 +24,9 @@ app.get('/products', async (request, response) => {
   response.send(result);
 })
 
-app.get('/products/:_id', async (request, response) => {
-  result = await db.find({"_id" : request.params._id});
-  response.send({"_id" : request.params._id, "result" : result});
-});
-
 app.get('/products/search', async (request, response) => {
   
   var queryParams = {}
-
-  console.log(request);
 
   const brand = request.query.brand;
   const price = parseInt(request.query.price);
@@ -49,13 +40,43 @@ app.get('/products/search', async (request, response) => {
 
   result = await db.find(queryParams);
 
-  if (limit != undefined){
-    response.send(result.limit(limit));
+  if (limit != undefined){ // the .limit function doesn't work for some reason ???
+    let count = 0;
+    res = []
+    for (var key in result){
+      if (count >= limit) {
+        response.send({
+          "brand" : brand,
+          "price" : price,
+          "limit" : limit,
+          "result" : res
+        })
+        return;
+      };
+      
+      res.push(result[key]);
+      count++;
+      console.log(count);
+      
+    }
   }
 
-  else response.send(result);
+  response.send({
+    "brand" : brand,
+    "price" : price,
+    "limit" : limit,
+    "result" : result
+  })
 
 });
+
+app.get('/products/:_id', async (request, response) => {
+  result = await db.find({"_id" : request.params._id});
+  response.send({
+    "_id" : request.params._id, 
+    "result" : result});
+});
+
 
 app.listen(PORT);
 

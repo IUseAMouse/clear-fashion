@@ -1,7 +1,7 @@
 const cors = require('cors');
 const express = require('express');
 const helmet = require('helmet');
-const db = require('../db');
+const db = require('./db');
 
 const PORT = 8092;
 

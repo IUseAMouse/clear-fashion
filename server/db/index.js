@@ -1,4 +1,4 @@
-require('dotenv').config() // Recurses parents directories until it finds a .env to use
+require('dotenv').config()
 const {MongoClient} = require('mongodb');
 const fs = require('fs');
 

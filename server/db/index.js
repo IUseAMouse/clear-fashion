@@ -1,4 +1,4 @@
-require('dotenv').config({ path: require('find-config')('.env') }) // Recurses parents directories until it finds a .env to use
+require('dotenv').config() // Recurses parents directories until it finds a .env to use
 const {MongoClient} = require('mongodb');
 const fs = require('fs');
 
@@ -20,7 +20,7 @@ const getDB = module.exports.getDB = async () => {
       return database;
     }
 
-    client = await MongoClient.connect("mongodb+srv://IUseAMouse:Connelles27430@clearfashion.sdryf.mongodb.net/ClearFashion?retryWrites=true&w=majority", {'useNewUrlParser': true});
+    client = await MongoClient.connect(MONGODB_URI, {'useNewUrlParser': true});
     database = client.db(MONGODB_DB_NAME);
 
     console.log('💽  Connected');

@@ -185,21 +185,10 @@ body {
 	opacity: 0%;
 }
 
-.navbar-right:hover .logo svg {
-	transform: rotate(-180deg);
-	opacity: 0%;
-}
-
 /* Small screens */
 @media only screen and (max-width: 600px) {
 .navbar {
 	bottom: 0;
-	width: 100vw;
-	height: 5rem;
-}
-
-.navbar-right {
-	top: 0;
 	width: 100vw;
 	height: 5rem;
 }
@@ -229,34 +218,16 @@ main {
 	height: 100vh;
 }
 
-.navbar-right {
-	top: 0;
-	width: 5rem;
-	height: 100vh;
-}
-
 .navbar:hover {
 	width: 16rem;
 }
 
-.navbar-right:hover {
-	width: 16rem;
-}
 
 .navbar:hover .link-text {
 	display: inline;
 }
 
-.navbar-right:hover .link-text {
-	display: inline;
-}
-
 .navbar:hover .logo svg
-{
-	margin-left: 11rem;
-}
-
-.navbar-right:hover .logo svg
 {
 	margin-left: 11rem;
 }
@@ -266,8 +237,4 @@ main {
 	left: 0px;
 }
 
-.navbar-right:hover .logo-text
-{
-	left: 0px;
-}
 }

@@ -3,86 +3,106 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <!-- Bootstrap CSS -->
+    <link href="style.css" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
     <title>👕 Clear Fahion | Environmentally & human-friendly clothes</title>
   </head>
   <body>
-    <h1>Clear fashion</h1>
-    <section id="options">
-      <div id="show">
-        <label for="show-select">Show:</label>
-        <select name="show" id="show-select">
-          <option value="12">12</option>
-          <option value="24">24</option>
-          <option value="48">48</option>
-        </select>
+    <div class="container-fluid text-center my-auto d-flex">
+      <nav class="navbar" data-html2canvas-ignore="true">
+        <ul class="navbar-nav my-auto">
+          <li class="logo">
+            <a href="#" class="nav-link">
+              <span class="link-text logo-text" id="sideTitle" style="color: #fffff7;">CLEAR FASHION</span>
+              <svg
+                aria-hidden="true"
+                focusable="false"
+                data-prefix="fad"
+                data-icon="angle-double-right"
+                role="img"
+                xmlns="http://www.w3.org/2000/svg"
+                viewBox="0 0 448 512"
+                class="svg-inline--fa fa-angle-double-right fa-w-14 fa-5x"
+              >
+                <g class="fa-group">
+                  <path
+                    fill="currentColor"
+                    d="M224 273L88.37 409a23.78 23.78 0 0 1-33.8 0L32 386.36a23.94 23.94 0 0 1 0-33.89l96.13-96.37L32 159.73a23.94 23.94 0 0 1 0-33.89l22.44-22.79a23.78 23.78 0 0 1 33.8 0L223.88 239a23.94 23.94 0 0 1 .1 34z"
+                    class="fa-secondary"
+                  ></path>
+                  <path
+                    fill="currentColor"
+                    d="M415.89 273L280.34 409a23.77 23.77 0 0 1-33.79 0L224 386.26a23.94 23.94 0 0 1 0-33.89L320.11 256l-96-96.47a23.94 23.94 0 0 1 0-33.89l22.52-22.59a23.77 23.77 0 0 1 33.79 0L416 239a24 24 0 0 1-.11 34z"
+                    class="fa-primary"
+                  ></path>
+                </g>
+              </svg>
+            </a>
+          </li>
+          <section id="options">
+            <div id="show" class="nav-item">
+              <h4 for="show-select">Page count</h4>
+              <select name="show" id="show-select" class="nav-link" style="color:antiquewhite">
+                <option value="12">Show 12 per page</option>
+                <option value="24">Show 24 per page</option>
+                <option value="36">Show 36 per page</option>
+              </select>
+            </div></br>
+            <div id="page" class="nav-item">
+              <h4 for="page-select">Page</h4>
+              <select name="page" id="page-select" class="nav-link" style="color:antiquewhite"></select>
+            </div></br>
+            <div id="filters" class="nav-item">
+              <h4 for="reasonable-price">Price Threshold</h4>
+              <select name="price" id="reasonable-price" class="nav-link" style="color:antiquewhite">
+                <option value="none">I want expensive</option> 
+                <option value="yes-reasonable">Only two digits please</option>    
+              </select></br>
+              <div id="brand" class="nav-item">
+                <h4 for="brand-select">Brands</h4>
+                <select name="brand" id="brand-select" class="nav-link" style="color:antiquewhite"> 
+                  <option value="none">Give me all the brands</option>
+                  <option value="loom">Just Loom</option>
+                  <option value="dedicated">Just Dedicated</option>
+                </select>
+              </div>
+            </div></br>
+            <div id="sort" class="nav-item">
+              <h4 for="sort-select">Sort</h4>
+              <select name="sort" id="sort-select" class="nav-link" style="color:antiquewhite">
+                <option value="none">None</option>
+                <option value="price-asc">Cheaper First !</option>
+                <option value="price-desc">Expensive First, I'm rich !</option>
+              </select>
+            </div>
+          </section>     
+        </ul>
+      </nav> 
+      <div class="col my-auto text-center">
+          <section id="indicators">
+            <h2>Indicators</h2>
+            <div>
+              <span><b>Number of products</b></span>
+              <span id="nbProducts">0</span>
+            </div>
+            <div>
+              <span><b>Average price value</b></span>
+              <span id="avg-price">0</span>
+            </div>
+            <div>
+              <span><b>Time spent on this project</b></span>
+              <span>No clue</span>
+            </div>
+            <div>
+              <span><b>Hotel ?</b></span>
+              <span>Trivago</span>
+            </div>
+          </section> 
       </div>
-      <div id="page">
-        <label for="page-select">Go to page:</label>
-        <select name="page" id="page-select"> </select>
+      <div class="col my-auto text-center">
+        <section id="products"></section>
       </div>
-      <div id="filters">
-        <label for="reasonable-price">By Reasonable Price:</label>
-        <select name="price" id="reasonable-price">
-          <option value="none">No</option> 
-          <option value="yes-reasonable">Yes</option>    
-        </select>
-        <label for="recent-products">By Recently Released:</label>
-        <select name="price" id="recent-products"> 
-          <option value="none">No</option>
-          <option value="yes-recent">Yes</option>
-        </select>
-        <div id="brand">
-          <label for="brand-select">By brands:</label>
-          <select name="brand" id="brand-select"> 
-            <option value="none">No</option>
-            <option value="loom">Loom</option>
-            <option value="coteleparis">Cotele Paris</option>
-            <option value="1083">1083</option>
-            <option value="dedicated">Dedicated</option>
-            <option value="adresse">Adresse</option>
-          </select>
-        </div>
-      </div>
-      <div id="sort">
-        <label for="sort-select">Sort:</label>
-        <select name="sort" id="sort-select">
-          <option value="none">None</option>
-          <option value="price-asc">Cheaper</option>
-          <option value="price-desc">Expensive</option>
-          <option value="date-asc">Recently released</option>
-          <option value="date-desc">Anciently released</option>
-        </select>
-      </div>
-    </section>
-    <section id="indicators">
-      <h2>Indicators</h2>
-      <div>
-        <span>Number of products</span>
-        <span id="nbProducts">0</span>
-      </div>
-      <div>
-        <span>Number of new products</span>
-        <span id="nbNewProducts">0</span>
-      </div>
-      <div>
-        <span>p50 price value</span>
-        <span>0</span>
-      </div>
-      <div>
-        <span>p90 price value</span>
-        <span>0</span>
-      </div>
-      <div>
-        <span>p95 price value</span>
-        <span>0</span>
-      </div>
-      <div>
-        <span>Last released date</span>
-        <span>2020-01-01</span>
-      </div>
-    </section>   
-    <section id="products"></section> 
+    </div>
     <script type="text/javascript" charset="UTF-8" src="portfolio.js"></script>
   </body>
 </html>

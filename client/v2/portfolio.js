@@ -13,8 +13,8 @@ const spanNbProducts = document.querySelector('#nbProducts');
 const spanNbNewProducts = document.querySelector('#nbNewProducts');
 const sortInfo = document.querySelector('#sort-select');
 const brandNames = document.querySelector('#brand-select');
-const recentProducts = document.querySelector('#recent-products');
 const reasonablePrice = document.querySelector('#reasonable-price');
+const avgPrice = document.querySelector('#avg-price')
 
 const database = fetchProducts(1, currentPagination.count);
 
@@ -51,7 +51,6 @@ const setCurrentProducts = ({result, meta}) => {
 
   result = result.sort(sortTranslator[sortInfo.value])
   .filter(filterTranslator[brandNames.value])
-  .filter(filterTranslator[recentProducts.value])
   .filter(filterTranslator[reasonablePrice.value]);
 
   currentProducts = result
@@ -67,7 +66,7 @@ const setCurrentProducts = ({result, meta}) => {
 async function fetchProducts(page = 1, size = 12) {
   try {
     const response = await fetch(
-      `https://clear-fashion-api.vercel.app?page=${page}&size=${size}`
+      `https://cf-api-yvannvincent-devincifr.vercel.app/products?page=${page}&size=${size}`
     );
     const body = await response.json();
 
@@ -94,7 +93,7 @@ const renderProducts = products => {
   const template = products
     .map(product => {
       return `
-      <div class="product" id=${product.uuid}>
+      <div class="product" id=${product._id}>
         <span>${product.brand}</span>
         <a href="${product.link}">${product.name}</a>
         <span>${product.price}</span>
@@ -114,7 +113,7 @@ const renderProducts = products => {
  * @param  {Object} pagination
  */
 const renderPagination = pagination => {
-  const {currentPage, pageCount} = pagination;
+  const {currentPage, pageCount, average} = pagination;
   const options = Array.from(
     {'length': pageCount},
     (value, index) => `<option value="${index + 1}">${index + 1}</option>`
@@ -122,6 +121,7 @@ const renderPagination = pagination => {
 
   selectPage.innerHTML = options;
   selectPage.selectedIndex = currentPage - 1;
+  avgPrice.innerHTML = average;
 };
 
 /**
@@ -173,12 +173,6 @@ sortInfo.addEventListener('change', event => {
 })
 
 brandNames.addEventListener('change', event => {
-  fetchProducts(currentPagination.currentPage, currentPagination.pageCount)
-  .then(setCurrentProducts)
-  .then(() => render(currentProducts, currentPagination));
-})
-
-recentProducts.addEventListener('change', event => {
   fetchProducts(currentPagination.currentPage, currentPagination.pageCount)
   .then(setCurrentProducts)
   .then(() => render(currentProducts, currentPagination));

@@ -66,7 +66,7 @@ const setCurrentProducts = ({result, meta}) => {
 async function fetchProducts(page = 1, size = 12) {
   try {
     const response = await fetch(
-      `https://cf-api-yvannvincent-devincifr.vercel.app/products?page=${page}&size=${size}`
+      `https://clothes-api-five.vercel.app/products?page=${page}&size=${size}`
     );
     const body = await response.json();
 
